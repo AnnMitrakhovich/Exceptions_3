@@ -5,18 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DataParse {
-    private final Pattern namePattern;
-    private final String datePattern;
-    private final Pattern phonePattern;
-    private final Pattern genderPattern;
-
-
-    public DataParse(Pattern namePattern, String datePattern, Pattern phonePattern, Pattern genderPattern) {
-        this.namePattern = namePattern;
-        this.datePattern = datePattern;
-        this.phonePattern = phonePattern;
-        this.genderPattern = genderPattern;
-    }
+    private Data personData;
 
     public Data parsePersonDate(String data) throws ParsingDataExceptions {
         String[] partsInfo = data.split(" ");
@@ -69,14 +58,14 @@ public class DataParse {
 
     // Проверим заполнение данными, если не все поля заполнены - выбасываем соответствующее исключение
     public void checkData(Data personData) {
-        if (personData.getFirstName().isEmpty() || personData.getSecondName().isEmpty() || personData.getLastName().isEmpty()){
+        if (personData.getFirstName().isEmpty() || personData.getSecondName().isEmpty() || personData.getLastName().isEmpty()) {
             throw new ParsingDataExceptions("Не заполнено ФИО");
         }
-        if (personData.getDateOfBirth() == null){
+        if (personData.getDateOfBirth() == null) {
             throw new ParsingDataExceptions("Не заполнена дата рождения");
         }
 
-        if(personData.getGender().isEmpty()){
+        if (personData.getGender().isEmpty()) {
             throw new ParsingDataExceptions("Не заполнен пол");
         }
     }
